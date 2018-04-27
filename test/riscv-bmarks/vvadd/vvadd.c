@@ -19,5 +19,18 @@ void __attribute__((noinline)) vvadd(int coreid, int ncores, size_t n, const dat
 
 void __attribute__((noinline)) vvadd_opt(int coreid, int ncores, size_t n, const data_t* x, const data_t* y, data_t* z)
 {
-  // TODO: Your code here
+   size_t i;
+   int start;
+   int end;
+
+   start = coreid * n / ncores;
+   if(coreid == ncores - 1)
+      end = n;
+   else
+      end = n / ncores;
+
+   for (i = start; i < end; i++)
+   {
+      z[i] = x[i] + y[i];
+   }
 }
